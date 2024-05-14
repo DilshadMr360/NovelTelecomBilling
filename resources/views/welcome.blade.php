@@ -7,7 +7,13 @@
 </head>
 <body>
   <h1 class="text-3xl font-bold underline">
-    Hello world!
+    <form action="{{ route('file.upload') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="csv_file">
+        <input type="submit" value="Upload">
+        @dump($errors->first())
+    </form>
+
   </h1>
 </body>
 </html>
