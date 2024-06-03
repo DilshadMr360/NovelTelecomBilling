@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('package_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('user_type', ['user', 'admin'])->default('user');
-            $table->rememberToken();
+            $table->unsignedBigInteger('packageoption_id');
+            $table->string('rate');
+            $table->string('rate_name');
+            $table->string('rate_type');
             $table->timestamps();
+            $table->foreign('packageoption_id')->references('id')->on('package_options')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('package_rates');
     }
 };
